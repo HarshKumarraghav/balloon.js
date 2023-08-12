@@ -25,19 +25,30 @@ const argv = minimist<{
 }>(process.argv.slice(2), { string: ["_"] });
 const cwd = process.cwd();
 
-const TEMPLATES = FRAMEWORKS.map(
-  (framework) =>
-    (framework.variants &&
-      framework.variants.map((v: FrameworkVariant) => v.name)) || [
-      framework.name,
-    ]
-).reduce((a, b) => a.concat(b), []);
+const TEMPLATES = FRAMEWORKS.map((framework) => {
+  const frameworkVariants = [
+    [framework.name], // Include the main framework name
+    ...(framework.variants
+      ? framework.variants.map((v) => {
+          const variantVariants = v.variants
+            ? v.variants.map((vv) => vv.name)
+            : [];
+          return [v.name, ...variantVariants];
+        })
+      : []),
+  ];
+
+  return frameworkVariants.reduce((a, b) => a.concat(b), []);
+}).reduce((a, b) => a.concat(b), []);
+
+console.log(TEMPLATES);
 
 const renameFiles: Record<string, string | undefined> = {
   _gitignore: ".gitignore",
+  "README-template.md": "README.md",
 };
 
-const defaultTargetDir = "shru-app";
+const defaultTargetDir = "balloon-app";
 
 async function init() {
   const argTargetDir = FormatTargetDirectory(argv._[0]);
@@ -48,7 +59,13 @@ async function init() {
     targetDir === "." ? path.basename(path.resolve()) : targetDir;
 
   let result: prompts.Answers<
-    "projectName" | "overwrite" | "packageName" | "framework" | "variant"
+    | "projectName"
+    | "overwrite"
+    | "packageName"
+    | "framework"
+    | "variant"
+    | "subVarient"
+    | "subVarient1"
   >;
 
   try {
@@ -116,10 +133,51 @@ async function init() {
           message: reset("Select a variant:"),
           choices: (framework: Framework) =>
             framework.variants.map((variant) => {
+              // if variant has variants, it's a sub-variant then we need to recursively call the function to get the sub-variant choices
               const variantColor = variant.color;
+              if (variant.variants) {
+                return {
+                  title: variantColor(variant.display || variant.name),
+                  value: variant,
+                };
+              }
               return {
                 title: variantColor(variant.display || variant.name),
                 value: variant.name,
+              };
+            }),
+        },
+        {
+          type: (variant: FrameworkVariant) =>
+            variant && variant.variants ? "select" : null,
+          name: "subVarient",
+          message: reset("Select the language:"),
+          choices: (variant) =>
+            variant.variants.map((subVariant: FrameworkVariant) => {
+              const subVariantColor = subVariant.color;
+              if (subVariant.variants) {
+                return {
+                  title: subVariantColor(subVariant.display || subVariant.name),
+                  value: subVariant,
+                };
+              }
+              return {
+                title: subVariantColor(subVariant.display || subVariant.name),
+                value: subVariant.name,
+              };
+            }),
+        },
+        {
+          type: (subVariant: FrameworkVariant) =>
+            subVariant && subVariant.variants ? "select" : null,
+          name: "subVarient1",
+          message: reset("Select the UI framework:"),
+          choices: (subVariant) =>
+            subVariant.variants.map((sub: FrameworkVariant) => {
+              const subVariantColors = sub.color;
+              return {
+                title: subVariantColors(sub.display || sub.name),
+                value: sub.name,
               };
             }),
         },
@@ -131,12 +189,20 @@ async function init() {
       }
     );
   } catch (cancelled: any) {
-    console.log(cancelled.message);
+    console.log("error message", cancelled.message);
     return;
   }
 
   // user choice associated with prompts
-  const { framework, overwrite, packageName, variant } = result;
+  const {
+    framework,
+    overwrite,
+    packageName,
+    variant,
+    subVarient1,
+    subVarient,
+  } = result;
+  console.log("result", result);
 
   const root = path.join(cwd, targetDir);
 
@@ -147,7 +213,8 @@ async function init() {
   }
 
   // determine template
-  let template: string = variant || framework?.name || argTemplate;
+  let template: string =
+    subVarient1 || subVarient || variant || framework?.name || argTemplate;
   let isReactSwc = false;
   if (template.includes("-swc")) {
     isReactSwc = true;

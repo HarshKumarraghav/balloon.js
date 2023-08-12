@@ -51,3 +51,5 @@ test-timings.json
 *.tsbuildinfo
 .swc/
 .turbo
+shru-app
+balloon-app

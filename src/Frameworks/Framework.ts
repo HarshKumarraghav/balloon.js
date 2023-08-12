@@ -18,9 +18,92 @@ export const FRAMEWORKS: Framework[] = [
     color: lightBlue,
     variants: [
       {
-        name: "custom-next",
+        name: "next-app-ts",
+        display: "Nextjs App Router",
+        color: blue,
+        variants: [
+          {
+            name: "next-app-ts",
+            display: "TypeScript",
+            color: blue,
+            variants: [
+              {
+                name: "next-app-ts",
+                display: "default",
+                color: blue,
+              },
+              {
+                name: "next-app-tw-ts",
+                display: "Tailwind",
+                color: blue,
+              },
+            ],
+          },
+          {
+            name: "next-app-js",
+            display: "JavaScript",
+            color: yellow,
+            variants: [
+              {
+                name: "next-app-js",
+                display: "default",
+                color: yellow,
+              },
+              {
+                name: "next-app-tw-js",
+                display: "Tailwind",
+                color: yellow,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "next-default-js",
+        display: "Nextjs Default Router",
+        color: blue,
+        variants: [
+          {
+            name: "next-default-ts",
+            display: "TypeScript",
+            color: blue,
+            variants: [
+              {
+                name: "next-default-ts",
+                display: "default",
+                color: blue,
+              },
+              {
+                name: "next-default-tw-ts",
+
+                display: "Tailwind",
+                color: blue,
+              },
+            ],
+          },
+          {
+            name: "next-default-js",
+            display: "JavaScript",
+            color: yellow,
+            variants: [
+              {
+                name: "next-default-js",
+                display: "default",
+                color: yellow,
+              },
+              {
+                name: "next-default-tw-js",
+                display: "Tailwind",
+                color: yellow,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "next-js",
         display: "Customize with create-next-app ↗",
-        color: lightBlue,
+        color: green,
         customCommand: "npm create next-app TARGET_DIR",
       },
     ],

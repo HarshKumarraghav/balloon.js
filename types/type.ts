@@ -10,4 +10,5 @@ export type FrameworkVariant = {
   display: string;
   color: ColorFunc;
   customCommand?: string;
+  variants?: FrameworkVariant[];
 };
