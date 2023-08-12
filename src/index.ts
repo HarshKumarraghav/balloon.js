@@ -206,8 +206,10 @@ async function init() {
   const templateDir = path.resolve(
     fileURLToPath(import.meta.url),
     "../..",
-    `template-${template}`
+    `Templates/balloon-${template}`
   );
+
+  console.log("templateDir", templateDir);
 
   const write = (file: string, content?: string) => {
     const targetPath = path.join(root, renameFiles[file] ?? file);

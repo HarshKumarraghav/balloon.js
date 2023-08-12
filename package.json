@@ -5,7 +5,8 @@
   "main": "index.ts",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run copy-non-compiled-folder",
+    "copy-non-compiled-folder": "cp -R Templates dist/",
     "start": "node ./index.js",
     "test": "jest"
   },
