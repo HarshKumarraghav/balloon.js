@@ -1,0 +1,42 @@
+{
+  "name": "create-shru-cli",
+  "version": "1.0.0",
+  "description": "A CLI for all",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./index.js",
+    "test": "jest"
+  },
+  "bin": {
+    "create-shru-app": "./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HarshKumarraghav/create-shru-cli.git"
+  },
+  "keywords": [
+    "cli",
+    "nextjs",
+    "reactjs",
+    "remix",
+    "astro",
+    "vue.js"
+  ],
+  "author": "HarshKumarraghav",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HarshKumarraghav/create-shru-cli/issues"
+  },
+  "homepage": "https://github.com/HarshKumarraghav/create-shru-cli#readme",
+  "devDependencies": {
+    "@types/cross-spawn": "^6.0.2",
+    "@types/minimist": "^1.2.2",
+    "@types/prompts": "^2.4.4",
+    "cross-spawn": "^7.0.3",
+    "kolorist": "^1.8.0",
+    "minimist": "^1.2.8",
+    "prompts": "^2.4.2"
+  }
+}
