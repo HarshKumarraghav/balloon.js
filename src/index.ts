@@ -130,7 +130,7 @@ async function init() {
           type: (framework: Framework) =>
             framework && framework.variants ? "select" : null,
           name: "variant",
-          message: reset("Select a variant:"),
+          message: reset("Select the variant:"),
           choices: (framework: Framework) =>
             framework.variants.map((variant) => {
               // if variant has variants, it's a sub-variant then we need to recursively call the function to get the sub-variant choices
@@ -151,7 +151,7 @@ async function init() {
           type: (variant: FrameworkVariant) =>
             variant && variant.variants ? "select" : null,
           name: "subVarient",
-          message: reset("Select the language:"),
+          message: reset("Select the variant:"),
           choices: (variant) =>
             variant.variants.map((subVariant: FrameworkVariant) => {
               const subVariantColor = subVariant.color;
@@ -171,7 +171,7 @@ async function init() {
           type: (subVariant: FrameworkVariant) =>
             subVariant && subVariant.variants ? "select" : null,
           name: "subVarient1",
-          message: reset("Select the UI framework:"),
+          message: reset("Select the variant:"),
           choices: (subVariant) =>
             subVariant.variants.map((sub: FrameworkVariant) => {
               const subVariantColors = sub.color;
