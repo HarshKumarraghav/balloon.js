@@ -1,0 +1,32 @@
+name: Issue - Issue Template
+description: Report a software bug on /learn, /news, Community Forum, Code Radio, or any of the platforms.
+labels: ['type: bug', 'status: waiting triage']
+body:
+  - type: markdown
+    attributes:
+      value: If you're reporting a security issue, don't create a GitHub issue. Instead, visit https://periodically.tech
+  - type: textarea
+    attributes:
+      label: Describe the Issue
+      description: A clear and concise description of the issue you encountered.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem. You can drag and drop `png`, `jpg`, `gif`, etc. in this box.
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: System
+      description: Please complete the following information.
+      value: 
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here.
+    validations:
+      required: false
