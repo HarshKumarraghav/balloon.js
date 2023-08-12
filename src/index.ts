@@ -11,8 +11,14 @@ import { Framework, FrameworkVariant } from "../types/type";
 import { FRAMEWORKS } from "./Frameworks/Framework.js";
 import { isValidPackageName } from "./Helpers/IsValidPackageName.js";
 import { toValidPackageName } from "./Helpers/ToValidPackageName.js";
+import { isEmpty } from "./Helpers/IsEmpty.js";
+import { emptyDir } from "./Helpers/EmptyDirectory.js";
+import { pkgFromUserAgent } from "./Helpers/PkgFromUserAgent.js";
+import { setupReactSwc } from "./Helpers/SetUpReactSwc.js";
+
 // Avoids autoconversion to number of the project name by defining that the args
 // non associated with an option ( _ ) needs to be parsed as a string. See #4606
+
 const argv = minimist<{
   t?: string;
   template?: string;
@@ -254,53 +260,3 @@ async function init() {
 init().catch((e) => {
   console.error(e);
 });
-
-function isEmpty(path: string) {
-  const files = fs.readdirSync(path);
-  return files.length === 0 || (files.length === 1 && files[0] === ".git");
-}
-
-function emptyDir(dir: string) {
-  if (!fs.existsSync(dir)) {
-    return;
-  }
-  for (const file of fs.readdirSync(dir)) {
-    if (file === ".git") {
-      continue;
-    }
-    fs.rmSync(path.resolve(dir, file), { recursive: true, force: true });
-  }
-}
-
-function pkgFromUserAgent(userAgent: string | undefined) {
-  if (!userAgent) return undefined;
-  const pkgSpec = userAgent.split(" ")[0];
-  const pkgSpecArr = pkgSpec.split("/");
-  return {
-    name: pkgSpecArr[0],
-    version: pkgSpecArr[1],
-  };
-}
-
-function setupReactSwc(root: string, isTs: boolean) {
-  editFile(path.resolve(root, "package.json"), (content) => {
-    return content.replace(
-      /"@vitejs\/plugin-react": ".+?"/,
-      `"@vitejs/plugin-react-swc": "^3.3.2"`
-    );
-  });
-  editFile(
-    path.resolve(root, `vite.config.${isTs ? "ts" : "js"}`),
-    (content) => {
-      return content.replace(
-        "@vitejs/plugin-react",
-        "@vitejs/plugin-react-swc"
-      );
-    }
-  );
-}
-
-function editFile(file: string, callback: (content: string) => string) {
-  const content = fs.readFileSync(file, "utf-8");
-  fs.writeFileSync(file, callback(content), "utf-8");
-}
