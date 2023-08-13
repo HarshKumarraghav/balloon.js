@@ -1,5 +1,13 @@
 import figlet from "figlet";
-import { blue, lightGreen, lightBlue, lightRed, yellow } from "kolorist";
+import {
+  blue,
+  lightGreen,
+  lightBlue,
+  lightRed,
+  yellow,
+  bold,
+  italic,
+} from "kolorist";
 import { FRAMEWORKS } from "../Frameworks/Framework.js";
 import symbols from "log-symbols";
 
@@ -17,9 +25,9 @@ export const StartingLogMessage = () => {
     " " +
     lightBlue(" * ChakraUI") +
     " " +
-    lightRed(" * AntDesign") +
+    lightRed(" * AntDesign (upcoming...)") +
     " " +
-    lightBlue(" *  MaterialUI");
+    lightBlue(" *  MaterialUI (upcoming...)");
   function createBanner(text: string) {
     return figlet.textSync(text, {
       font: "Standard", // You can choose a different font
@@ -60,8 +68,10 @@ export const StartingLogMessage = () => {
   );
   console.log();
   console.log(
-    lightGreen(
-      "All you need to do is select a framework and you are good to go!"
+    bold(
+      lightGreen(
+        "All you need to do is select a framework and you are good to go!"
+      )
     )
   );
   console.log();
@@ -71,7 +81,15 @@ export const StartingLogMessage = () => {
   });
   console.log(frameworkString.join(" "));
   console.log();
-  console.log(lightGreen("You can also choose your favorite UI library:"));
+  console.log(
+    bold(lightGreen("You can also choose your favorite UI library:"))
+  );
+  console.log(
+    italic(
+      lightRed("Note: Few UI Library/Framework support is under development")
+    )
+  );
+
   console.log();
   console.log(UILibrary);
   console.log();
