@@ -1,3 +1,9 @@
+#### 2.1.0 (2023-08-13)
+
+##### Other Changes
+
+*  removed from git ignore and made unbuild as a dev-dependency ([23827474](https://github.com/HarshKumarraghav/balloon.js/commit/23827474a2474d57928d85b76afdb29a07ecc02a))
+
 #### 2.0.5 (2023-08-13)
 
 ##### Other Changes
