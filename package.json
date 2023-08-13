@@ -1,7 +1,7 @@
 {
-  "name": "create-shru-cli",
-  "version": "1.0.0",
-  "description": "A CLI for all",
+  "name": "balloon.js",
+  "version": "1.1.1",
+  "description": "A CLI tool to create a project with a single command.",
   "main": "index.ts",
   "type": "module",
   "scripts": {
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HarshKumarraghav/create-shru-cli.git"
+    "url": "https://github.com/HarshKumarraghav/balloon.js"
   },
   "keywords": [
     "cli",
@@ -28,9 +28,9 @@
   "author": "HarshKumarraghav",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/HarshKumarraghav/create-shru-cli/issues"
+    "url": "https://github.com/HarshKumarraghav/balloon.js/issues"
   },
-  "homepage": "https://github.com/HarshKumarraghav/create-shru-cli#readme",
+  "homepage": "https://github.com/HarshKumarraghav/balloon.js#readme",
   "devDependencies": {
     "@types/cross-spawn": "^6.0.2",
     "@types/figlet": "^1.5.6",
