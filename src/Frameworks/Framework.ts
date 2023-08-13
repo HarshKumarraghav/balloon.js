@@ -49,11 +49,9 @@ export const FRAMEWORKS: Framework[] = [
                   "npx create-next-app@latest TARGET_DIR --typescript --tailwind --eslint --app  && npx shadcn-ui@latest init",
               },
               {
-                name: "next-app-chakra-ts",
+                name: "next-app-cui-ts",
                 display: "ChakraUI",
                 color: blue,
-                customCommand:
-                  "npx create-next-app@latest TARGET_DIR --typescript --chakra-ui --eslint --app",
               },
             ],
           },
@@ -78,7 +76,12 @@ export const FRAMEWORKS: Framework[] = [
                 display: "Tailwind + SchadCn UI ↗",
                 color: yellow,
                 customCommand:
-                  "npx create-next-app@latest TARGET_DIR --tailwind --eslint --app && cd TARGET_DIR && npx shadcn-ui@latest init",
+                  "npx create-next-app@latest TARGET_DIR --js --tailwind --eslint --app && npx shadcn-ui@latest init",
+              },
+              {
+                name: "next-app-cui-js",
+                display: "ChakraUI",
+                color: blue,
               },
             ],
           },
@@ -103,8 +106,19 @@ export const FRAMEWORKS: Framework[] = [
               },
               {
                 name: "next-default-tw-ts",
-
                 display: "Tailwind",
+                color: blue,
+              },
+              {
+                name: "next-default-ts",
+                display: "Tailwind + SchadCn UI ↗",
+                color: yellow,
+                customCommand:
+                  "npx create-next-app@latest TARGET_DIR --typescript --tailwind --eslint  && npx shadcn-ui@latest init",
+              },
+              {
+                name: "next-default-cui-ts",
+                display: "ChakraUI",
                 color: blue,
               },
             ],
@@ -130,16 +144,22 @@ export const FRAMEWORKS: Framework[] = [
                 display: "Tailwind",
                 color: yellow,
               },
+              {
+                name: "next-default-js",
+                display: "Tailwind + SchadCn UI ↗",
+                color: yellow,
+                customCommand:
+                  "npx create-next-app@latest TARGET_DIR --js --tailwind --eslint && npx shadcn-ui@latest init",
+              },
+              {
+                name: "next-default-cui-js",
+                display: "ChakraUI",
+                color: blue,
+              },
             ],
           },
         ],
       },
-      // {
-      //   name: "next-js",
-      //   display: "Customize with create-next-app ↗",
-      //   color: green,
-      //   customCommand: "npm create next-app@latest TARGET_DIR",
-      // },
     ],
   },
   {
