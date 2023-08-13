@@ -6,7 +6,7 @@ import minimist from "minimist";
 import { copy } from "./Helpers/Copy.js";
 import { fileURLToPath } from "node:url";
 import { FormatTargetDirectory } from "./Helpers/FormatTargetDirectory.js";
-import { red, bgMagenta, lightGreen, green } from "kolorist";
+import { red, bgGreen, lightGreen, green } from "kolorist";
 import { Framework, FrameworkVariant } from "../types/type";
 import { FRAMEWORKS } from "./Frameworks/Framework.js";
 import { isValidPackageName } from "./Helpers/IsValidPackageName.js";
@@ -84,7 +84,7 @@ async function init() {
         {
           type: argTargetDir ? null : "text",
           name: "projectName",
-          message: bgMagenta("Project name:"),
+          message: bgGreen("Project name:"),
           initial: defaultTargetDir,
           onState: (state) => {
             targetDir = FormatTargetDirectory(state.value) || defaultTargetDir;
@@ -112,7 +112,7 @@ async function init() {
         {
           type: () => (isValidPackageName(getProjectName()) ? null : "text"),
           name: "packageName",
-          message: bgMagenta("Package name:"),
+          message: bgGreen("Package name:"),
           initial: () => toValidPackageName(getProjectName()),
           validate: (dir) =>
             isValidPackageName(dir) || "Invalid package.json name",
@@ -123,10 +123,10 @@ async function init() {
           name: "framework",
           message:
             typeof argTemplate === "string" && !TEMPLATES.includes(argTemplate)
-              ? bgMagenta(
+              ? bgGreen(
                   `"${argTemplate}" isn't a valid template. Please choose from below: `
                 )
-              : bgMagenta("Select a framework:"),
+              : bgGreen("Select a framework:"),
           initial: 0,
           choices: FRAMEWORKS.map((framework) => {
             const frameworkColor = framework.color;
@@ -140,7 +140,7 @@ async function init() {
           type: (framework: Framework) =>
             framework && framework.variants ? "select" : null,
           name: "variant",
-          message: bgMagenta("Select the variant:"),
+          message: bgGreen("Select the variant:"),
           choices: (framework: Framework) =>
             framework.variants.map((variant) => {
               // if variant has variants, it's a sub-variant then we need to recursively call the function to get the sub-variant choices
@@ -161,7 +161,7 @@ async function init() {
           type: (variant: FrameworkVariant) =>
             variant && variant.variants ? "select" : null,
           name: "subVarient",
-          message: bgMagenta("Select the variant:"),
+          message: (variant) => bgGreen(`Select the ${variant.variantType}:`),
           choices: (variant) =>
             variant.variants.map((subVariant: FrameworkVariant) => {
               const subVariantColor = subVariant.color;
@@ -181,7 +181,8 @@ async function init() {
           type: (subVariant: FrameworkVariant) =>
             subVariant && subVariant.variants ? "select" : null,
           name: "subVarient1",
-          message: bgMagenta("Select the variant:"),
+          message: (subVariant) =>
+            bgGreen(`Select the ${subVariant.variantType}:`),
           choices: (subVariant) =>
             subVariant.variants.map((sub: FrameworkVariant) => {
               const subVariantColors = sub.color;
@@ -234,50 +235,125 @@ async function init() {
   const pkgManager = pkgInfo ? pkgInfo.name : "npm";
   const isYarn1 = pkgManager === "yarn" && pkgInfo?.version.startsWith("1.");
 
-  const { customCommand } =
-    FRAMEWORKS.flatMap((f) => f.variants).find((v) => v.name === template) ??
-    {};
+  // const { customCommand } =
+  //   FRAMEWORKS.flatMap((f) => f.variants).find((v) => v.name === template) ??
+  //   {};
+  const findCustomCommand: any = (frameworks: Framework[], template: any) => {
+    for (const framework of frameworks) {
+      for (const variant of framework.variants) {
+        if (variant.name === template) {
+          if (variant.customCommand) {
+            return variant.customCommand;
+          }
+        }
+        if (variant.variants) {
+          const result = findCustomCommand(variant.variants, template);
+          if (result) {
+            return result;
+          }
+        }
+      }
+    }
+    return null;
+  };
+  const customCommand = findCustomCommand(FRAMEWORKS, template);
+  console.log("customCommand", customCommand);
+  // if (customCommand) {
+  //   const fullCustomCommand = customCommand
+  //     .replace(/^npm create /, () => {
+  //       // `bun create` uses it's own set of templates,
+  //       // the closest alternative is using `bun x` directly on the package
+  //       if (pkgManager === "bun") {
+  //         return "bun x create-";
+  //       }
+  //       return `${pkgManager} create `;
+  //     })
+  //     // Only Yarn 1.x doesn't support `@version` in the `create` command
+  //     .replace("@latest", () => (isYarn1 ? "" : "@latest"))
+  //     .replace(/^npm exec/, () => {
+  //       // Prefer `pnpm dlx`, `yarn dlx`, or `bun x`
+  //       if (pkgManager === "pnpm") {
+  //         return "pnpm dlx";
+  //       }
+  //       if (pkgManager === "yarn" && !isYarn1) {
+  //         return "yarn dlx";
+  //       }
+  //       if (pkgManager === "bun") {
+  //         return "bun x";
+  //       }
+  //       // Use `npm exec` in all other cases,
+  //       // including Yarn 1.x and other custom npm clients.
+  //       return "npm exec";
+  //     });
+
+  //   const [command, ...args] = fullCustomCommand.split(" ");
+  //   // we replace TARGET_DIR here because targetDir may include a space
+  //   const replacedArgs = args.map((arg: string) =>
+  //     arg.replace("TARGET_DIR", targetDir)
+  //   );
+  //   const { status } = spawn.sync(command, replacedArgs, {
+  //     stdio: "inherit",
+  //   });
+  //   process.exit(status ?? 0);
+  // }
 
   if (customCommand) {
-    const fullCustomCommand = customCommand
-      .replace(/^npm create /, () => {
-        // `bun create` uses it's own set of templates,
-        // the closest alternative is using `bun x` directly on the package
-        if (pkgManager === "bun") {
-          return "bun x create-";
-        }
-        return `${pkgManager} create `;
-      })
-      // Only Yarn 1.x doesn't support `@version` in the `create` command
-      .replace("@latest", () => (isYarn1 ? "" : "@latest"))
-      .replace(/^npm exec/, () => {
-        // Prefer `pnpm dlx`, `yarn dlx`, or `bun x`
-        if (pkgManager === "pnpm") {
-          return "pnpm dlx";
-        }
-        if (pkgManager === "yarn" && !isYarn1) {
-          return "yarn dlx";
-        }
-        if (pkgManager === "bun") {
-          return "bun x";
-        }
-        // Use `npm exec` in all other cases,
-        // including Yarn 1.x and other custom npm clients.
-        return "npm exec";
-      });
+    const customCommands = customCommand.split(/\s*&&\s*/); // Split by '&&' to handle multiple commands
+    for (let i = 0; i < customCommands.length; i++) {
+      const fullCustomCommand = customCommands[i]
+        .replace(/^npm create /, () => {
+          if (pkgManager === "bun") {
+            return "bun x create-";
+          }
+          return `${pkgManager} create `;
+        })
+        .replace("@latest", () => (isYarn1 ? "" : "@latest"))
+        .replace(/^npm exec/, () => {
+          if (pkgManager === "pnpm") {
+            return "pnpm dlx";
+          }
+          if (pkgManager === "yarn" && !isYarn1) {
+            return "yarn dlx";
+          }
+          if (pkgManager === "bun") {
+            return "bun x";
+          }
+          return "npm exec";
+        });
 
-    const [command, ...args] = fullCustomCommand.split(" ");
-    // we replace TARGET_DIR here because targetDir may include a space
-    const replacedArgs = args.map((arg: string) =>
-      arg.replace("TARGET_DIR", targetDir)
-    );
-    const { status } = spawn.sync(command, replacedArgs, {
-      stdio: "inherit",
-    });
-    process.exit(status ?? 0);
+      const [Cmd, ...secondArgs] = fullCustomCommand.split(" ");
+      const replacedSecondArgs = secondArgs.map((arg: string) =>
+        arg.replace("TARGET_DIR", targetDir)
+      );
+      if (i !== 0) {
+        const { status } = spawn.sync(Cmd, replacedSecondArgs, {
+          stdio: "inherit",
+          cwd: targetDir,
+        });
+
+        if (status !== 0) {
+          console.error(
+            `Second command '${Cmd} ${replacedSecondArgs.join(" ")}' failed.`
+          );
+          process.exit(status ?? 0);
+        }
+      } else {
+        const { status } = spawn.sync(Cmd, replacedSecondArgs, {
+          stdio: "inherit",
+        });
+
+        if (status !== 0) {
+          console.error(
+            `Third command '${Cmd} ${replacedSecondArgs.join(" ")}' failed.`
+          );
+          process.exit(status ?? 0);
+        }
+      }
+    }
+    process.exit(0);
   }
 
-  console.log(lightGreen(`\nScaffolding project in ${root}...`));
+  console.log(lightGreen(`\n Initializing project in ${root}...`));
 
   const templateDir = path.resolve(
     fileURLToPath(import.meta.url),
@@ -311,6 +387,7 @@ async function init() {
   }
 
   const cdProjectName = path.relative(cwd, root);
+
   ProjectInitiated();
   console.log(green(`\n Now run the following commands:\n`));
   if (root !== cwd) {

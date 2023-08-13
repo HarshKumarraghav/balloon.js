@@ -14,16 +14,18 @@ import { Framework } from "../../types/type";
 export const FRAMEWORKS: Framework[] = [
   {
     name: "next",
-    display: "Nextjs",
+    display: "Next",
     color: lightBlue,
     variants: [
       {
         name: "next-app-ts",
         display: "Nextjs App Router",
+        variantType: "Language",
         color: blue,
         variants: [
           {
             name: "next-app-ts",
+            variantType: "UI Library/Framework",
             display: "TypeScript",
             color: blue,
             variants: [
@@ -36,12 +38,29 @@ export const FRAMEWORKS: Framework[] = [
                 name: "next-app-tw-ts",
                 display: "Tailwind",
                 color: blue,
+                customCommand:
+                  "npx create-next-app@latest TARGET_DIR --typescript --tailwind --eslint --app",
+              },
+              {
+                name: "next-ts",
+                display: "Tailwind + SchadCn UI ↗",
+                color: yellow,
+                customCommand:
+                  "npx create-next-app@latest TARGET_DIR --typescript --tailwind --eslint --app  && npx shadcn-ui@latest init",
+              },
+              {
+                name: "next-app-chakra-ts",
+                display: "ChakraUI",
+                color: blue,
+                customCommand:
+                  "npx create-next-app@latest TARGET_DIR --typescript --chakra-ui --eslint --app",
               },
             ],
           },
           {
             name: "next-app-js",
             display: "JavaScript",
+            variantType: "UI Library/Framework",
             color: yellow,
             variants: [
               {
@@ -54,6 +73,13 @@ export const FRAMEWORKS: Framework[] = [
                 display: "Tailwind",
                 color: yellow,
               },
+              {
+                name: "next-js",
+                display: "Tailwind + SchadCn UI ↗",
+                color: yellow,
+                customCommand:
+                  "npx create-next-app@latest TARGET_DIR --tailwind --eslint --app && cd TARGET_DIR && npx shadcn-ui@latest init",
+              },
             ],
           },
         ],
@@ -61,11 +87,13 @@ export const FRAMEWORKS: Framework[] = [
       {
         name: "next-default-js",
         display: "Nextjs Default Router",
+        variantType: "Language",
         color: blue,
         variants: [
           {
             name: "next-default-ts",
             display: "TypeScript",
+            variantType: "UI Library/Framework",
             color: blue,
             variants: [
               {
@@ -84,6 +112,7 @@ export const FRAMEWORKS: Framework[] = [
           {
             name: "next-default-js",
             display: "JavaScript",
+            variantType: "UI Library/Framework",
             color: yellow,
             variants: [
               {
@@ -96,15 +125,47 @@ export const FRAMEWORKS: Framework[] = [
                 display: "Tailwind",
                 color: yellow,
               },
+              {
+                name: "next-default-js",
+                display: "Tailwind",
+                color: yellow,
+              },
             ],
           },
         ],
       },
+      // {
+      //   name: "next-js",
+      //   display: "Customize with create-next-app ↗",
+      //   color: green,
+      //   customCommand: "npm create next-app@latest TARGET_DIR",
+      // },
+    ],
+  },
+  {
+    name: "react",
+    display: "React",
+    color: cyan,
+    variants: [
       {
-        name: "next-js",
-        display: "Customize with create-next-app ↗",
-        color: green,
-        customCommand: "npm create next-app TARGET_DIR",
+        name: "react-ts",
+        display: "TypeScript",
+        color: blue,
+      },
+      {
+        name: "react-swc-ts",
+        display: "TypeScript + SWC",
+        color: blue,
+      },
+      {
+        name: "react",
+        display: "JavaScript",
+        color: yellow,
+      },
+      {
+        name: "react-swc",
+        display: "JavaScript + SWC",
+        color: yellow,
       },
     ],
   },
@@ -151,33 +212,6 @@ export const FRAMEWORKS: Framework[] = [
         display: "Nuxt ↗",
         color: lightGreen,
         customCommand: "npm exec nuxi init TARGET_DIR",
-      },
-    ],
-  },
-  {
-    name: "react",
-    display: "React",
-    color: cyan,
-    variants: [
-      {
-        name: "react-ts",
-        display: "TypeScript",
-        color: blue,
-      },
-      {
-        name: "react-swc-ts",
-        display: "TypeScript + SWC",
-        color: blue,
-      },
-      {
-        name: "react",
-        display: "JavaScript",
-        color: yellow,
-      },
-      {
-        name: "react-swc",
-        display: "JavaScript + SWC",
-        color: yellow,
       },
     ],
   },
