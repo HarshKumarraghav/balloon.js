@@ -7,6 +7,6 @@
 //                                                                                          |__/       🎈
 // ________________________________________________________________________________________________________
 
-/* The line `import "./dist/src/index.js";` is importing the `index.js` file from the `dist/src`
-directory. This allows the code in the `index.js` file to be executed and used in the current file. */
-import "./dist/src/index.js";
+/* The line `import "./dist/index.mjs";` is importing the `index.mjs` file from the `dist` directory.
+This allows the code in the `index.mjs` file to be executed and used in the current file. */
+import "./dist/index.mjs";

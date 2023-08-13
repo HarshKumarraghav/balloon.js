@@ -15,7 +15,6 @@ import { isEmpty } from "./Helpers/IsEmpty.js";
 import { emptyDir } from "./Helpers/EmptyDirectory.js";
 import { pkgFromUserAgent } from "./Helpers/PkgFromUserAgent.js";
 import { setupReactSwc } from "./Helpers/SetUpReactSwc.js";
-
 import { ProjectInitiated, StartingLogMessage } from "./Helpers/Starter.js";
 
 StartingLogMessage();
