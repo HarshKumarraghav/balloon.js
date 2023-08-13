@@ -6,7 +6,7 @@ import minimist from "minimist";
 import { copy } from "./Helpers/Copy.js";
 import { fileURLToPath } from "node:url";
 import { FormatTargetDirectory } from "./Helpers/FormatTargetDirectory.js";
-import { red, bgGreen, lightGreen, green } from "kolorist";
+import { red, bgGreen, lightGreen, green, bold } from "kolorist";
 import { Framework, FrameworkVariant } from "../types/type";
 import { FRAMEWORKS } from "./Frameworks/Framework.js";
 import { isValidPackageName } from "./Helpers/IsValidPackageName.js";
@@ -258,44 +258,6 @@ async function init() {
   };
   const customCommand = findCustomCommand(FRAMEWORKS, template);
   console.log("customCommand", customCommand);
-  // if (customCommand) {
-  //   const fullCustomCommand = customCommand
-  //     .replace(/^npm create /, () => {
-  //       // `bun create` uses it's own set of templates,
-  //       // the closest alternative is using `bun x` directly on the package
-  //       if (pkgManager === "bun") {
-  //         return "bun x create-";
-  //       }
-  //       return `${pkgManager} create `;
-  //     })
-  //     // Only Yarn 1.x doesn't support `@version` in the `create` command
-  //     .replace("@latest", () => (isYarn1 ? "" : "@latest"))
-  //     .replace(/^npm exec/, () => {
-  //       // Prefer `pnpm dlx`, `yarn dlx`, or `bun x`
-  //       if (pkgManager === "pnpm") {
-  //         return "pnpm dlx";
-  //       }
-  //       if (pkgManager === "yarn" && !isYarn1) {
-  //         return "yarn dlx";
-  //       }
-  //       if (pkgManager === "bun") {
-  //         return "bun x";
-  //       }
-  //       // Use `npm exec` in all other cases,
-  //       // including Yarn 1.x and other custom npm clients.
-  //       return "npm exec";
-  //     });
-
-  //   const [command, ...args] = fullCustomCommand.split(" ");
-  //   // we replace TARGET_DIR here because targetDir may include a space
-  //   const replacedArgs = args.map((arg: string) =>
-  //     arg.replace("TARGET_DIR", targetDir)
-  //   );
-  //   const { status } = spawn.sync(command, replacedArgs, {
-  //     stdio: "inherit",
-  //   });
-  //   process.exit(status ?? 0);
-  // }
 
   if (customCommand) {
     const customCommands = customCommand.split(/\s*&&\s*/); // Split by '&&' to handle multiple commands
@@ -350,6 +312,32 @@ async function init() {
         }
       }
     }
+    const cdProjectName = path.relative(cwd, root);
+
+    ProjectInitiated();
+    console.log(green(`\n Now run the following commands:\n`));
+    if (root !== cwd) {
+      console.log(
+        bold(
+          green(
+            `  cd ${
+              cdProjectName.includes(" ") ? `"${cdProjectName}"` : cdProjectName
+            }`
+          )
+        )
+      );
+    }
+    switch (pkgManager) {
+      case "yarn":
+        console.log(bold(green("  yarn")));
+        console.log(bold(green("  yarn dev")));
+        break;
+      default:
+        console.log(bold(green(`  ${pkgManager} install`)));
+        console.log(bold(green(`  ${pkgManager} run dev`)));
+        break;
+    }
+    console.log();
     process.exit(0);
   }
 
@@ -392,19 +380,23 @@ async function init() {
   console.log(green(`\n Now run the following commands:\n`));
   if (root !== cwd) {
     console.log(
-      `  cd ${
-        cdProjectName.includes(" ") ? `"${cdProjectName}"` : cdProjectName
-      }`
+      bold(
+        green(
+          `  cd ${
+            cdProjectName.includes(" ") ? `"${cdProjectName}"` : cdProjectName
+          }`
+        )
+      )
     );
   }
   switch (pkgManager) {
     case "yarn":
-      console.log("  yarn");
-      console.log("  yarn dev");
+      console.log(bold(green("  yarn")));
+      console.log(bold(green("  yarn dev")));
       break;
     default:
-      console.log(`  ${pkgManager} install`);
-      console.log(`  ${pkgManager} run dev`);
+      console.log(bold(green(`  ${pkgManager} install`)));
+      console.log(bold(green(`  ${pkgManager} run dev`)));
       break;
   }
   console.log();

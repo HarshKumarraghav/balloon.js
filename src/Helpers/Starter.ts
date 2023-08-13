@@ -36,7 +36,7 @@ export const StartingLogMessage = () => {
   }
   const start = createStart("Let's get started! 🚀");
   const letStart = lightRed(start);
-  const bannerText = "Welcome to Balloon!";
+  const bannerText = "Welcome to Balloon.js!";
   const banner = createBanner(bannerText);
   console.log();
   console.log();
@@ -109,7 +109,7 @@ export const ProjectInitiated = () => {
       verticalLayout: "default",
     });
   }
-  const bannerText = "Project Initialized!";
+  const bannerText = "Balloon Project Initialized!";
   const banner = createBanner(bannerText);
 
   console.log();
