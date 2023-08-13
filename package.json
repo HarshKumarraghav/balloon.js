@@ -33,6 +33,7 @@
   "homepage": "https://github.com/HarshKumarraghav/create-shru-cli#readme",
   "devDependencies": {
     "@types/cross-spawn": "^6.0.2",
+    "@types/figlet": "^1.5.6",
     "@types/minimist": "^1.2.2",
     "@types/node": "^20.4.10",
     "@types/prompts": "^2.4.4",
@@ -40,9 +41,11 @@
     "@typescript-eslint/parser": "^6.3.0",
     "cross-spawn": "^7.0.3",
     "eslint": "^8.47.0",
+    "figlet": "^1.6.0",
     "kolorist": "^1.8.0",
     "minimist": "^1.2.8",
     "prompts": "^2.4.2",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "log-symbols": "^5.1.0"
   }
 }

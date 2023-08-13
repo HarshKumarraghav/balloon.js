@@ -6,7 +6,7 @@ import minimist from "minimist";
 import { copy } from "./Helpers/Copy.js";
 import { fileURLToPath } from "node:url";
 import { FormatTargetDirectory } from "./Helpers/FormatTargetDirectory.js";
-import { red, reset } from "kolorist";
+import { red, bgMagenta, lightGreen, green } from "kolorist";
 import { Framework, FrameworkVariant } from "../types/type";
 import { FRAMEWORKS } from "./Frameworks/Framework.js";
 import { isValidPackageName } from "./Helpers/IsValidPackageName.js";
@@ -16,15 +16,23 @@ import { emptyDir } from "./Helpers/EmptyDirectory.js";
 import { pkgFromUserAgent } from "./Helpers/PkgFromUserAgent.js";
 import { setupReactSwc } from "./Helpers/SetUpReactSwc.js";
 
-// Avoids autoconversion to number of the project name by defining that the args
-// non associated with an option ( _ ) needs to be parsed as a string. See #4606
+import { ProjectInitiated, StartingLogMessage } from "./Helpers/Starter.js";
 
+StartingLogMessage();
+
+/* The code is using the `minimist` library to parse the command-line arguments passed to the script.
+It creates an object `argv` that contains the parsed arguments. The `string: ["_"]` option tells
+`minimist` to treat all arguments as strings, including the positional arguments (arguments without
+a flag). */
 const argv = minimist<{
   t?: string;
   template?: string;
 }>(process.argv.slice(2), { string: ["_"] });
 const cwd = process.cwd();
 
+/* The code is creating an array of templates by iterating over the `FRAMEWORKS` array. For each
+framework, it includes the main framework name and its variants (if any). It then flattens the array
+of templates using `reduce` and returns the final array of templates. */
 const TEMPLATES = FRAMEWORKS.map((framework) => {
   const frameworkVariants = [
     [framework.name], // Include the main framework name
@@ -41,8 +49,10 @@ const TEMPLATES = FRAMEWORKS.map((framework) => {
   return frameworkVariants.reduce((a, b) => a.concat(b), []);
 }).reduce((a, b) => a.concat(b), []);
 
-console.log(TEMPLATES);
-
+/* The `renameFiles` object is used to specify the renaming of certain files during the scaffolding
+process. It maps the original file names to the desired file names. For example, `_gitignore` will
+be renamed to `.gitignore` and `README-template.md` will be renamed to `README.md`. This allows for
+customization of file names in the generated project. */
 const renameFiles: Record<string, string | undefined> = {
   _gitignore: ".gitignore",
   "README-template.md": "README.md",
@@ -74,7 +84,7 @@ async function init() {
         {
           type: argTargetDir ? null : "text",
           name: "projectName",
-          message: reset("Project name:"),
+          message: bgMagenta("Project name:"),
           initial: defaultTargetDir,
           onState: (state) => {
             targetDir = FormatTargetDirectory(state.value) || defaultTargetDir;
@@ -102,7 +112,7 @@ async function init() {
         {
           type: () => (isValidPackageName(getProjectName()) ? null : "text"),
           name: "packageName",
-          message: reset("Package name:"),
+          message: bgMagenta("Package name:"),
           initial: () => toValidPackageName(getProjectName()),
           validate: (dir) =>
             isValidPackageName(dir) || "Invalid package.json name",
@@ -113,10 +123,10 @@ async function init() {
           name: "framework",
           message:
             typeof argTemplate === "string" && !TEMPLATES.includes(argTemplate)
-              ? reset(
+              ? bgMagenta(
                   `"${argTemplate}" isn't a valid template. Please choose from below: `
                 )
-              : reset("Select a framework:"),
+              : bgMagenta("Select a framework:"),
           initial: 0,
           choices: FRAMEWORKS.map((framework) => {
             const frameworkColor = framework.color;
@@ -130,7 +140,7 @@ async function init() {
           type: (framework: Framework) =>
             framework && framework.variants ? "select" : null,
           name: "variant",
-          message: reset("Select the variant:"),
+          message: bgMagenta("Select the variant:"),
           choices: (framework: Framework) =>
             framework.variants.map((variant) => {
               // if variant has variants, it's a sub-variant then we need to recursively call the function to get the sub-variant choices
@@ -151,7 +161,7 @@ async function init() {
           type: (variant: FrameworkVariant) =>
             variant && variant.variants ? "select" : null,
           name: "subVarient",
-          message: reset("Select the variant:"),
+          message: bgMagenta("Select the variant:"),
           choices: (variant) =>
             variant.variants.map((subVariant: FrameworkVariant) => {
               const subVariantColor = subVariant.color;
@@ -171,7 +181,7 @@ async function init() {
           type: (subVariant: FrameworkVariant) =>
             subVariant && subVariant.variants ? "select" : null,
           name: "subVarient1",
-          message: reset("Select the variant:"),
+          message: bgMagenta("Select the variant:"),
           choices: (subVariant) =>
             subVariant.variants.map((sub: FrameworkVariant) => {
               const subVariantColors = sub.color;
@@ -202,7 +212,6 @@ async function init() {
     subVarient1,
     subVarient,
   } = result;
-  console.log("result", result);
 
   const root = path.join(cwd, targetDir);
 
@@ -268,7 +277,7 @@ async function init() {
     process.exit(status ?? 0);
   }
 
-  console.log(`\nScaffolding project in ${root}...`);
+  console.log(lightGreen(`\nScaffolding project in ${root}...`));
 
   const templateDir = path.resolve(
     fileURLToPath(import.meta.url),
@@ -302,7 +311,8 @@ async function init() {
   }
 
   const cdProjectName = path.relative(cwd, root);
-  console.log(`\nDone. Now run:\n`);
+  ProjectInitiated();
+  console.log(green(`\n Now run the following commands:\n`));
   if (root !== cwd) {
     console.log(
       `  cd ${
