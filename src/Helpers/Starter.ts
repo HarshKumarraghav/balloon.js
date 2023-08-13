@@ -10,7 +10,7 @@ import {
 } from "kolorist";
 import { FRAMEWORKS } from "../Frameworks/Framework.js";
 import symbols from "log-symbols";
-
+import gradient from "gradient-string";
 /**
  * The `StartingLogMessage` function logs a welcome message and instructions for using the Balloon CLI
  * tool, including framework and UI library options.
@@ -49,7 +49,7 @@ export const StartingLogMessage = () => {
   console.log();
   console.log();
   console.log();
-  console.log(lightBlue(banner + "🎈"));
+  console.log(gradient.pastel(banner + "🎈"));
   console.log(
     lightBlue(
       "________________________________________________________________________________________________________"
