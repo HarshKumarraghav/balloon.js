@@ -9,7 +9,6 @@
     "dist"
   ],
   "scripts": {
-    "release": "standard-version",
     "dev": "unbuild --stub",
     "build": "unbuild",
     "typecheck": "tsc --noEmit",

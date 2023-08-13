@@ -1,5 +1,4 @@
 # build output
-dist
 .next
 target
 packages/next/wasm/@next
