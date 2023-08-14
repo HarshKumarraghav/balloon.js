@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 // __        __   _                            _          ____        _ _                      _     _
 // \ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___   | __ )  __ _| | | ___   ___  _ __    (_)___| |
 //  \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \  |  _ \ / _` | | |/ _ \ / _ \| '_ \   | / __| |
@@ -9,4 +10,5 @@
 
 /* The line `import "./dist/index.mjs";` is importing the `index.mjs` file from the `dist` directory.
 This allows the code in the `index.mjs` file to be executed and used in the current file. */
+
 import "./dist/index.mjs";

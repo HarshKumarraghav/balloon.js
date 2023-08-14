@@ -1,4 +1,3 @@
-import figlet from "figlet";
 import {
   blue,
   lightGreen,
@@ -28,28 +27,13 @@ export const StartingLogMessage = () => {
     lightRed(" * AntDesign (upcoming...)") +
     " " +
     lightBlue(" *  MaterialUI (upcoming...)");
-  function createBanner(text: string) {
-    return figlet.textSync(text, {
-      font: "Standard", // You can choose a different font
-      horizontalLayout: "default",
-      verticalLayout: "default",
-    });
-  }
-  function createStart(text: string) {
-    return figlet.textSync(text, {
-      font: "Standard", // You can choose a different font
-      horizontalLayout: "default",
-      verticalLayout: "default",
-    });
-  }
-  const start = createStart("Let's get started! 🚀");
-  const letStart = lightRed(start);
-  const bannerText = "Welcome to Balloon.js!";
-  const banner = createBanner(bannerText);
+
   console.log();
   console.log();
   console.log();
-  console.log(gradient.pastel(banner + "🎈"));
+
+  console.log(bold(gradient.pastel("Welcome to Balloon.js!" + "🎈")));
+
   console.log(
     lightBlue(
       "________________________________________________________________________________________________________"
@@ -110,7 +94,9 @@ export const StartingLogMessage = () => {
     )
   );
   console.log();
-  console.log(letStart);
+
+  console.log(lightRed("Let's get started!" + "🎈"));
+
   console.log();
   console.log();
 };
@@ -120,17 +106,9 @@ export const StartingLogMessage = () => {
  * figlet library and logs it to the console.
  */
 export const ProjectInitiated = () => {
-  function createBanner(text: string) {
-    return figlet.textSync(text, {
-      font: "Standard", // You can choose a different font
-      horizontalLayout: "default",
-      verticalLayout: "default",
-    });
-  }
-  const bannerText = "Balloon Project Initialized!";
-  const banner = createBanner(bannerText);
-
   console.log();
-  console.log(lightRed(banner));
+
+  console.log(gradient.mind("Balloon Project Initialized!" + "🎈"));
+
   console.log();
 };

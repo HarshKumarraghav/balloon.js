@@ -5,7 +5,7 @@
   "type": "module",
   "files": [
     "index.js",
-    "Templates/balloon-*",
+    "Templates",
     "dist"
   ],
   "scripts": {
@@ -18,7 +18,7 @@
     "node": "^14.18.0 || >=16.0.0"
   },
   "bin": {
-    "create-balloon": "./index.js"
+    "create-balloon": "index.js"
   },
   "repository": {
     "type": "git",
@@ -40,7 +40,6 @@
   "homepage": "https://github.com/HarshKumarraghav/balloon.js#readme",
   "devDependencies": {
     "@types/cross-spawn": "^6.0.2",
-    "@types/figlet": "^1.5.6",
     "@types/gradient-string": "^1.1.2",
     "@types/minimist": "^1.2.2",
     "@types/node": "^20.4.10",
@@ -49,7 +48,6 @@
     "@typescript-eslint/parser": "^6.3.0",
     "cross-spawn": "^7.0.3",
     "eslint": "^8.47.0",
-    "figlet": "^1.6.0",
     "gradient-string": "^2.0.2",
     "kolorist": "^1.8.0",
     "log-symbols": "^5.1.0",
@@ -57,5 +55,8 @@
     "prompts": "^2.4.2",
     "typescript": "^5.1.6",
     "unbuild": "^1.2.1"
+  },
+  "dependencies": {
+    "rollup-plugin-license": "^3.0.1"
   }
 }

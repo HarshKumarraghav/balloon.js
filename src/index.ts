@@ -6,7 +6,7 @@ import minimist from "minimist";
 import { copy } from "./Helpers/Copy.js";
 import { fileURLToPath } from "node:url";
 import { FormatTargetDirectory } from "./Helpers/FormatTargetDirectory.js";
-import { red, bgGreen, lightGreen, green, bold } from "kolorist";
+import { red, bgGreen, lightGreen, green, bold, black } from "kolorist";
 import { Framework, FrameworkVariant } from "../types/type";
 import { FRAMEWORKS } from "./Frameworks/Framework.js";
 import { isValidPackageName } from "./Helpers/IsValidPackageName.js";
@@ -16,8 +16,6 @@ import { emptyDir } from "./Helpers/EmptyDirectory.js";
 import { pkgFromUserAgent } from "./Helpers/PkgFromUserAgent.js";
 import { setupReactSwc } from "./Helpers/SetUpReactSwc.js";
 import { ProjectInitiated, StartingLogMessage } from "./Helpers/Starter.js";
-
-StartingLogMessage();
 
 /* The code is using the `minimist` library to parse the command-line arguments passed to the script.
 It creates an object `argv` that contains the parsed arguments. The `string: ["_"]` option tells
@@ -29,6 +27,7 @@ const argv = minimist<{
 }>(process.argv.slice(2), { string: ["_"] });
 const cwd = process.cwd();
 
+StartingLogMessage();
 /* The code is creating an array of templates by iterating over the `FRAMEWORKS` array. For each
 framework, it includes the main framework name and its variants (if any). It then flattens the array
 of templates using `reduce` and returns the final array of templates. */
