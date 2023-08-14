@@ -1,6 +1,5 @@
 import {
   bgGray,
-  bgLightRed,
   blue,
   cyan,
   green,
