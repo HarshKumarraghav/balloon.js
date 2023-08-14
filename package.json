@@ -1,7 +1,11 @@
 {
   "name": "create-balloon",
   "version": "2.1.1",
-  "description": "A CLI tool to create a project with a single command.",
+  "description": "A single CLI to create a project with your favorite framework and UI library in a matter of seconds!",
+  "author": {
+    "name": "Harsh Kumar Raghav",
+    "email": "raghavharsh068@gmail.com"
+  },
   "type": "module",
   "files": [
     "index.js",
@@ -32,7 +36,6 @@
     "astro",
     "vue.js"
   ],
-  "author": "HarshKumarraghav",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/HarshKumarraghav/balloon.js/issues"

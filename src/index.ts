@@ -6,7 +6,7 @@ import minimist from "minimist";
 import { copy } from "./Helpers/Copy.js";
 import { fileURLToPath } from "node:url";
 import { FormatTargetDirectory } from "./Helpers/FormatTargetDirectory.js";
-import { red, bgGreen, lightGreen, green, bold, black } from "kolorist";
+import { red, bgGreen, lightGreen, green, bold } from "kolorist";
 import { Framework, FrameworkVariant } from "../types/type";
 import { FRAMEWORKS } from "./Frameworks/Framework.js";
 import { isValidPackageName } from "./Helpers/IsValidPackageName.js";
@@ -16,6 +16,7 @@ import { emptyDir } from "./Helpers/EmptyDirectory.js";
 import { pkgFromUserAgent } from "./Helpers/PkgFromUserAgent.js";
 import { setupReactSwc } from "./Helpers/SetUpReactSwc.js";
 import { ProjectInitiated, StartingLogMessage } from "./Helpers/Starter.js";
+import gradient from "gradient-string";
 
 /* The code is using the `minimist` library to parse the command-line arguments passed to the script.
 It creates an object `argv` that contains the parsed arguments. The `string: ["_"]` option tells
@@ -255,8 +256,6 @@ async function init() {
     return null;
   };
   const customCommand = findCustomCommand(FRAMEWORKS, template);
-  console.log("customCommand", customCommand);
-
   if (customCommand) {
     const customCommands = customCommand.split(/\s*&&\s*/); // Split by '&&' to handle multiple commands
     for (let i = 0; i < customCommands.length; i++) {
@@ -280,11 +279,13 @@ async function init() {
           }
           return "npm exec";
         });
-
       const [Cmd, ...secondArgs] = fullCustomCommand.split(" ");
       const replacedSecondArgs = secondArgs.map((arg: string) =>
         arg.replace("TARGET_DIR", targetDir)
       );
+      console.log();
+      console.log(gradient.retro("Executing: " + secondArgs[0]));
+      console.log();
       if (i !== 0) {
         const { status } = spawn.sync(Cmd, replacedSecondArgs, {
           stdio: "inherit",
