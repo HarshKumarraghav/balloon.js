@@ -1,4 +1,6 @@
 import {
+  bgGray,
+  bgLightRed,
   blue,
   cyan,
   green,
@@ -8,7 +10,6 @@ import {
   magenta,
   red,
   reset,
-  white,
   yellow,
 } from "kolorist";
 import { Framework } from "../../types/type";
@@ -44,8 +45,8 @@ export const FRAMEWORKS: Framework[] = [
               },
               {
                 name: "next-ts",
-                display: "Tailwind + SchadCn UI ↗",
-                color: white,
+                display: "Tailwind + SchadCn UI (recommended) ↗",
+                color: bgGray,
                 customCommand:
                   "npx create-next-app@latest TARGET_DIR --typescript --tailwind --eslint --app  && npx shadcn-ui@latest init",
               },
@@ -74,8 +75,8 @@ export const FRAMEWORKS: Framework[] = [
               },
               {
                 name: "next-js",
-                display: "Tailwind + SchadCn UI ↗",
-                color: white,
+                display: "Tailwind + SchadCn UI (recommended) ↗",
+                color: bgGray,
                 customCommand:
                   "npx create-next-app@latest TARGET_DIR --js --tailwind --eslint --app && npx shadcn-ui@latest init",
               },
@@ -103,7 +104,7 @@ export const FRAMEWORKS: Framework[] = [
               {
                 name: "next-default-ts",
                 display: "default",
-                color: lightBlue,
+                color: lightGreen,
               },
               {
                 name: "next-default-tw-ts",
@@ -112,8 +113,8 @@ export const FRAMEWORKS: Framework[] = [
               },
               {
                 name: "next-default-ts",
-                display: "Tailwind + SchadCn UI ↗",
-                color: white,
+                display: "Tailwind + SchadCn UI (recommended) ↗",
+                color: bgGray,
                 customCommand:
                   "npx create-next-app@latest TARGET_DIR --typescript --tailwind --eslint  && npx shadcn-ui@latest init",
               },
@@ -138,24 +139,20 @@ export const FRAMEWORKS: Framework[] = [
               {
                 name: "next-default-tw-js",
                 display: "Tailwind",
-                color: yellow,
+                color: lightBlue,
               },
+
               {
                 name: "next-default-js",
-                display: "Tailwind",
-                color: yellow,
-              },
-              {
-                name: "next-default-js",
-                display: "Tailwind + SchadCn UI ↗",
-                color: yellow,
+                display: "Tailwind + SchadCn UI (recommended) ↗",
+                color: bgGray,
                 customCommand:
                   "npx create-next-app@latest TARGET_DIR --js --tailwind --eslint && npx shadcn-ui@latest init",
               },
               {
                 name: "next-default-cui-js",
                 display: "ChakraUI",
-                color: blue,
+                color: cyan,
               },
             ],
           },
