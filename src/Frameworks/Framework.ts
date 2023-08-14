@@ -8,6 +8,7 @@ import {
   magenta,
   red,
   reset,
+  white,
   yellow,
 } from "kolorist";
 import { Framework } from "../../types/type";
@@ -21,7 +22,7 @@ export const FRAMEWORKS: Framework[] = [
         name: "next-app-ts",
         display: "Nextjs App Router",
         variantType: "Language",
-        color: blue,
+        color: magenta,
         variants: [
           {
             name: "next-app-ts",
@@ -32,26 +33,26 @@ export const FRAMEWORKS: Framework[] = [
               {
                 name: "next-app-ts",
                 display: "default",
-                color: blue,
+                color: lightGreen,
               },
               {
                 name: "next-app-tw-ts",
                 display: "Tailwind",
-                color: blue,
+                color: lightBlue,
                 customCommand:
                   "npx create-next-app@latest TARGET_DIR --typescript --tailwind --eslint --app",
               },
               {
                 name: "next-ts",
                 display: "Tailwind + SchadCn UI ↗",
-                color: yellow,
+                color: white,
                 customCommand:
                   "npx create-next-app@latest TARGET_DIR --typescript --tailwind --eslint --app  && npx shadcn-ui@latest init",
               },
               {
                 name: "next-app-cui-ts",
                 display: "ChakraUI",
-                color: blue,
+                color: cyan,
               },
             ],
           },
@@ -64,24 +65,24 @@ export const FRAMEWORKS: Framework[] = [
               {
                 name: "next-app-js",
                 display: "default",
-                color: yellow,
+                color: lightGreen,
               },
               {
                 name: "next-app-tw-js",
                 display: "Tailwind",
-                color: yellow,
+                color: lightBlue,
               },
               {
                 name: "next-js",
                 display: "Tailwind + SchadCn UI ↗",
-                color: yellow,
+                color: white,
                 customCommand:
                   "npx create-next-app@latest TARGET_DIR --js --tailwind --eslint --app && npx shadcn-ui@latest init",
               },
               {
                 name: "next-app-cui-js",
                 display: "ChakraUI",
-                color: blue,
+                color: cyan,
               },
             ],
           },
@@ -91,7 +92,7 @@ export const FRAMEWORKS: Framework[] = [
         name: "next-default-js",
         display: "Nextjs Default Router",
         variantType: "Language",
-        color: blue,
+        color: lightRed,
         variants: [
           {
             name: "next-default-ts",
@@ -102,24 +103,24 @@ export const FRAMEWORKS: Framework[] = [
               {
                 name: "next-default-ts",
                 display: "default",
-                color: blue,
+                color: lightBlue,
               },
               {
                 name: "next-default-tw-ts",
                 display: "Tailwind",
-                color: blue,
+                color: lightBlue,
               },
               {
                 name: "next-default-ts",
                 display: "Tailwind + SchadCn UI ↗",
-                color: yellow,
+                color: white,
                 customCommand:
                   "npx create-next-app@latest TARGET_DIR --typescript --tailwind --eslint  && npx shadcn-ui@latest init",
               },
               {
                 name: "next-default-cui-ts",
                 display: "ChakraUI",
-                color: blue,
+                color: cyan,
               },
             ],
           },
