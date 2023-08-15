@@ -10,7 +10,8 @@
   "files": [
     "index.js",
     "Templates",
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
     "dev": "unbuild --stub",
