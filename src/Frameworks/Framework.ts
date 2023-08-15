@@ -165,24 +165,92 @@ export const FRAMEWORKS: Framework[] = [
     color: cyan,
     variants: [
       {
-        name: "react-ts",
-        display: "TypeScript",
-        color: blue,
-      },
-      {
-        name: "react-swc-ts",
-        display: "TypeScript + SWC",
-        color: blue,
-      },
-      {
         name: "react",
-        display: "JavaScript",
-        color: yellow,
+        display: "React without SWC",
+        variantType: "Language",
+        variants: [
+          {
+            name: "react-ts",
+            display: "TypeScript",
+            color: blue,
+            variantType: "UI Library/Framework",
+            variants: [
+              {
+                name: "react-ts",
+                display: "default",
+                color: lightGreen,
+              },
+              {
+                name: "react-tw-ts",
+                display: "Tailwind",
+                color: lightBlue,
+              },
+            ],
+          },
+          {
+            name: "react-js",
+            display: "JavaScript",
+            color: yellow,
+            variantType: "UI Library/Framework",
+            variants: [
+              {
+                name: "react",
+                display: "default",
+                color: lightGreen,
+              },
+              {
+                name: "react-tw",
+                display: "Tailwind",
+                color: lightBlue,
+              },
+            ],
+          },
+        ],
+        color: blue,
       },
       {
         name: "react-swc",
-        display: "JavaScript + SWC",
-        color: yellow,
+        display: "React with SWC",
+        variantType: "Language",
+        variants: [
+          {
+            name: "react-swc-ts",
+            display: "TypeScript",
+            color: blue,
+            variantType: "UI Library/Framework",
+            variants: [
+              {
+                name: "react-swc-ts",
+                display: "default",
+                color: lightGreen,
+              },
+              {
+                name: "react-swc-tw-ts",
+                display: "Tailwind",
+                color: lightBlue,
+              },
+            ],
+          },
+          {
+            name: "react-swc-js",
+            display: "JavaScript",
+            color: yellow,
+            variantType: "UI Library/Framework",
+            variants: [
+              {
+                name: "react-swc",
+                display: "default",
+                color: lightGreen,
+              },
+              {
+                name: "react-swc-tw",
+                display: "Tailwind",
+                color: lightBlue,
+              },
+            ],
+          },
+        ],
+        color: blue,
       },
     ],
   },
