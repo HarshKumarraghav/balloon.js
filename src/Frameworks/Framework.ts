@@ -239,6 +239,11 @@ export const FRAMEWORKS: Framework[] = [
                 display: "Tailwind",
                 color: lightBlue,
               },
+              {
+                name: "react-swc-cui-ts",
+                display: "ChakraUI",
+                color: cyan,
+              },
             ],
           },
           {
@@ -256,6 +261,11 @@ export const FRAMEWORKS: Framework[] = [
                 name: "react-swc-tw",
                 display: "Tailwind",
                 color: lightBlue,
+              },
+              {
+                name: "react-swc-cui",
+                display: "ChakraUI",
+                color: cyan,
               },
             ],
           },
