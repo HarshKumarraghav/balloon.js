@@ -54,6 +54,11 @@ export const FRAMEWORKS: Framework[] = [
                 display: "ChakraUI",
                 color: cyan,
               },
+              {
+                name: "next-app-mui-ts",
+                display: "Material UI",
+                color: magenta,
+              },
             ],
           },
           {
@@ -83,6 +88,11 @@ export const FRAMEWORKS: Framework[] = [
                 name: "next-app-cui-js",
                 display: "ChakraUI",
                 color: cyan,
+              },
+              {
+                name: "next-app-mui-js",
+                display: "Material UI",
+                color: magenta,
               },
             ],
           },
