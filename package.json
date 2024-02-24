@@ -1,6 +1,6 @@
 {
   "name": "create-balloon",
-  "version": "3.2.0",
+  "version": "4.0.0",
   "description": "A single CLI to create a project with your favorite framework and UI library in a matter of seconds!",
   "author": {
     "name": "Harsh Kumar Raghav",
