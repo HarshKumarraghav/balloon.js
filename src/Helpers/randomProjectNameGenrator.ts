@@ -581,6 +581,6 @@ const getWord = () => {
 };
 
 export const getRandomProjectNameHandler = () => {
-  const randName = `${getWord()}-${getWord()}`;
+  const randName = `${getWord()}-${getWord()}`?.toLowerCase();
   return randName;
 };
