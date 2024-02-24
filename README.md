@@ -2,7 +2,7 @@
 
 Unleash Your Creative Power with Create-balloon CLI - The Ultimate App Starter Kit Generator.
 
-![Create-balloon](https://github.com/HarshKumarraghav/balloon.js/assets/72187191/9df83923-f2a2-41b7-8424-4c47650d2dd2)
+![Create-balloon](https://github.com/HarshKumarraghav/balloon.js/assets/72187191/cc79fc02-beff-4639-984e-b657465f2d9f)
 
 ## Installation
 
