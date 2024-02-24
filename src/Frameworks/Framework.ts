@@ -59,6 +59,11 @@ export const FRAMEWORKS: Framework[] = [
                 display: "Material UI",
                 color: magenta,
               },
+              {
+                name: "next-app-antd-ts",
+                display: "Ant Design",
+                color: red,
+              },
             ],
           },
           {
@@ -93,6 +98,11 @@ export const FRAMEWORKS: Framework[] = [
                 name: "next-app-mui-js",
                 display: "Material UI",
                 color: magenta,
+              },
+              {
+                name: "next-app-antd-js",
+                display: "Ant Design",
+                color: red,
               },
             ],
           },
@@ -200,6 +210,11 @@ export const FRAMEWORKS: Framework[] = [
                 display: "ChakraUI",
                 color: cyan,
               },
+              {
+                name: "react-antd-ts",
+                display: "Ant Design",
+                color: red,
+              },
             ],
           },
           {
@@ -222,6 +237,11 @@ export const FRAMEWORKS: Framework[] = [
                 name: "react-cui",
                 display: "ChakraUI",
                 color: cyan,
+              },
+              {
+                name: "react-antd",
+                display: "Ant Design",
+                color: red,
               },
             ],
           },
@@ -254,6 +274,11 @@ export const FRAMEWORKS: Framework[] = [
                 display: "ChakraUI",
                 color: cyan,
               },
+              {
+                name: "react-swc-antd-ts",
+                display: "Ant Design",
+                color: red,
+              },
             ],
           },
           {
@@ -276,6 +301,11 @@ export const FRAMEWORKS: Framework[] = [
                 name: "react-swc-cui",
                 display: "ChakraUI",
                 color: cyan,
+              },
+              {
+                name: "react-swc-antd",
+                display: "Ant Design",
+                color: red,
               },
             ],
           },
