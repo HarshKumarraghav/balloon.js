@@ -16,9 +16,9 @@ export const StartingLogMessage = () => {
     " " +
     lightBlue(" * ChakraUI") +
     " " +
-    lightRed(" * AntDesign (upcoming...)") +
+    lightRed(" * AntDesign") +
     " " +
-    lightBlue(" *  MaterialUI (upcoming...)");
+    lightBlue(" *  MaterialUI");
 
   console.log();
   console.log();
