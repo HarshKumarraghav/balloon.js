@@ -17,6 +17,7 @@ import { pkgFromUserAgent } from "./Helpers/PkgFromUserAgent.js";
 import { setupReactSwc } from "./Helpers/SetUpReactSwc.js";
 import { ProjectInitiated, StartingLogMessage } from "./Helpers/Starter.js";
 import gradient from "gradient-string";
+import { getRandomProjectNameHandler } from "./Helpers/randomProjectNameGenrator.js";
 
 /* The code is using the `minimist` library to parse the command-line arguments passed to the script.
 It creates an object `argv` that contains the parsed arguments. The `string: ["_"]` option tells
@@ -57,7 +58,7 @@ const renameFiles: Record<string, string | undefined> = {
   "README-template.md": "README.md",
 };
 
-const defaultTargetDir = "balloon-app";
+const defaultTargetDir = getRandomProjectNameHandler();
 
 async function init() {
   const argTargetDir = FormatTargetDirectory(argv._[0]);
@@ -123,7 +124,7 @@ async function init() {
           message:
             typeof argTemplate === "string" && !TEMPLATES.includes(argTemplate)
               ? bgGreen(
-                  `"${argTemplate}" isn't a valid template. Please choose from below: `
+                  `"${argTemplate}" isn't a valid template. Please choose from below: `,
                 )
               : bgGreen("Select a framework:"),
           initial: 0,
@@ -196,7 +197,7 @@ async function init() {
         onCancel: () => {
           throw new Error(red("✖") + " Operation cancelled");
         },
-      }
+      },
     );
   } catch (cancelled: any) {
     console.log("error message", cancelled.message);
@@ -281,7 +282,7 @@ async function init() {
         });
       const [Cmd, ...secondArgs] = fullCustomCommand.split(" ");
       const replacedSecondArgs = secondArgs.map((arg: string) =>
-        arg.replace("TARGET_DIR", targetDir)
+        arg.replace("TARGET_DIR", targetDir),
       );
       console.log();
       console.log(gradient.retro("Executing: " + secondArgs[0]));
@@ -294,7 +295,7 @@ async function init() {
 
         if (status !== 0) {
           console.error(
-            `Second command '${Cmd} ${replacedSecondArgs.join(" ")}' failed.`
+            `Second command '${Cmd} ${replacedSecondArgs.join(" ")}' failed.`,
           );
           process.exit(status ?? 0);
         }
@@ -305,7 +306,7 @@ async function init() {
 
         if (status !== 0) {
           console.error(
-            `Third command '${Cmd} ${replacedSecondArgs.join(" ")}' failed.`
+            `Third command '${Cmd} ${replacedSecondArgs.join(" ")}' failed.`,
           );
           process.exit(status ?? 0);
         }
@@ -321,9 +322,9 @@ async function init() {
           green(
             `  cd ${
               cdProjectName.includes(" ") ? `"${cdProjectName}"` : cdProjectName
-            }`
-          )
-        )
+            }`,
+          ),
+        ),
       );
     }
     switch (pkgManager) {
@@ -345,7 +346,7 @@ async function init() {
   const templateDir = path.resolve(
     fileURLToPath(import.meta.url),
     "../..",
-    `Templates/balloon-${template}`
+    `Templates/balloon-${template}`,
   );
   const write = (file: string, content?: string) => {
     const targetPath = path.join(root, renameFiles[file] ?? file);
@@ -362,7 +363,7 @@ async function init() {
   }
 
   const pkg = JSON.parse(
-    fs.readFileSync(path.join(templateDir, `package.json`), "utf-8")
+    fs.readFileSync(path.join(templateDir, `package.json`), "utf-8"),
   );
 
   pkg.name = packageName || getProjectName();
@@ -383,9 +384,9 @@ async function init() {
         green(
           `  cd ${
             cdProjectName.includes(" ") ? `"${cdProjectName}"` : cdProjectName
-          }`
-        )
-      )
+          }`,
+        ),
+      ),
     );
   }
   switch (pkgManager) {
