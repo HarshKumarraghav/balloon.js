@@ -147,6 +147,11 @@ export const FRAMEWORKS: Framework[] = [
                 display: "Material UI",
                 color: magenta,
               },
+              {
+                name: "next-default-antd-ts",
+                display: "Ant Design",
+                color: red,
+              },
             ],
           },
           {
@@ -182,6 +187,11 @@ export const FRAMEWORKS: Framework[] = [
                 name: "next-default-mui-js",
                 display: "Material UI",
                 color: magenta,
+              },
+              {
+                name: "next-default-antd-js",
+                display: "Ant Design",
+                color: red,
               },
             ],
           },
