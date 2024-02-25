@@ -131,7 +131,7 @@ export const FRAMEWORKS: Framework[] = [
                 color: lightBlue,
               },
               {
-                name: "next-default-ts",
+                name: "next-ts",
                 display: "Tailwind + SchadCn UI (recommended) ↗",
                 color: bgGray,
                 customCommand:
