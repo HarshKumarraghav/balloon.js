@@ -303,6 +303,11 @@ export const FRAMEWORKS: Framework[] = [
                 color: cyan,
               },
               {
+                name: "react-swc-mui-ts",
+                display: "Material UI",
+                color: magenta,
+              },
+              {
                 name: "react-swc-antd-ts",
                 display: "Ant Design",
                 color: red,
@@ -329,6 +334,11 @@ export const FRAMEWORKS: Framework[] = [
                 name: "react-swc-cui",
                 display: "ChakraUI",
                 color: cyan,
+              },
+              {
+                name: "react-swc-mui",
+                display: "Material UI",
+                color: magenta,
               },
               {
                 name: "react-swc-antd",
