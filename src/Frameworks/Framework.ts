@@ -231,6 +231,11 @@ export const FRAMEWORKS: Framework[] = [
                 color: cyan,
               },
               {
+                name: "react-mui-ts",
+                display: "Material UI",
+                color: magenta,
+              },
+              {
                 name: "react-antd-ts",
                 display: "Ant Design",
                 color: red,
@@ -257,6 +262,11 @@ export const FRAMEWORKS: Framework[] = [
                 name: "react-cui",
                 display: "ChakraUI",
                 color: cyan,
+              },
+              {
+                name: "react-mui",
+                display: "Material UI",
+                color: magenta,
               },
               {
                 name: "react-antd",
