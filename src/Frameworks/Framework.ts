@@ -39,8 +39,6 @@ export const FRAMEWORKS: Framework[] = [
                 name: "next-app-tw-ts",
                 display: "Tailwind",
                 color: lightBlue,
-                customCommand:
-                  "npx create-next-app@latest TARGET_DIR --typescript --tailwind --eslint --app",
               },
               {
                 name: "next-ts",
