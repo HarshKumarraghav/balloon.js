@@ -1,4 +1,4 @@
-# Create-bolloon CLI
+# Create-balloon CLI
 
 Unleash Your Creative Power with Create-balloon CLI - The Ultimate App Starter Kit Generator.
 
